@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Task } from './models/task.model';
-//very cool ~
+
 @Component({
   selector: 'crazy',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'app';
   currentFocus: string = 'Angular Homework';
@@ -18,9 +19,12 @@ export class AppComponent {
   new Task('Begin brainstorming possible JavaScript group projects', 2),
   new Task('Add README file to last few Angular repos on GitHub', 1)
   ];
-  editTask() {
-    alert("time to edit derp");
+  selectedTask = null;
+
+  editTask(clickedTask) {
+    this.selectedTask = clickedTask;
   }
+
   priorityColor(currentTask){
     if(currentTask.priority === 3){
       return "bg-danger";
@@ -29,5 +33,9 @@ export class AppComponent {
     } else {
       return "bg-info";
     }
+  }
+
+  finishedEditing(){
+    this.selectedTask = null;
   }
 }
