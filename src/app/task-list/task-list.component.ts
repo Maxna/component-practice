@@ -6,13 +6,22 @@ import { Task } from '../models/task.model';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent {
+  filterByCompleteness: string = "incompleteTasks";
   @Input() childTaskList: Task[];
   @Output() clickSender = new EventEmitter();
+
+  onChange(optionFromMenu) {
+    this.filterByCompleteness = optionFromMenu;
+  }
+
+  toggleDone(clickedTask: Task, setCompleteness: boolean) {
+    clickedTask.done = setCompleteness;
+  }
 
   editButtonClicked(taskToEdit: Task) {
     this.clickSender.emit(taskToEdit);
   }
-  
+
   priorityColor(currentTask){
     if(currentTask.priority === 3){
       return "bg-danger";
